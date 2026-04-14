@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GIIS Tech Club 2K26</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* CSS Variables & Theme */
+    :root {
+      /* Colors */
+      --color-bg-base: #030d1a;
+      --color-bg-alt: #04304C;
+      --color-bg-panel: rgba(11, 98, 121, 0.15);
+      --color-bg-nav: rgba(3, 13, 26, 0.85);
+
+      --color-accent: #00d4b4;
+      --color-accent-2: #2EB3BE;
+      --color-accent-3: #7debea;
+      --color-accent-dark: #0b6279;
+
+      --color-text-main: #ffffff;
+      --color-text-muted: #c8d4e3;
+
+      --color-border: rgba(125, 235, 234, 0.2);
+      --color-border-hover: rgba(46, 179, 190, 0.6);
+
+      /* Typography */
+      --font-body: 'Rajdhani', sans-serif;
+      --font-heading: 'Orbitron', sans-serif;
+
+      /* Spacing (8px grid system) */
+      --space-1: 8px;
+      --space-2: 16px;
+      --space-3: 24px;
+      --space-4: 32px;
+      --space-5: 40px;
+      --space-6: 48px;
+      --space-8: 64px;
+      --space-10: 80px;
+      --space-12: 96px;
+      --space-16: 128px;
+    }
+
+    /* Reset & Base */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-snap-type: y proximity;
+      scroll-padding-top: 100px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--color-bg-base);
+      color: var(--color-text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+
+      /* Updated Background */
+      background-image: url('Theme and Brand Design/Club Theme/Tech Club grid gradient.png');
+      background-size: 150vw 150vh;
+      background-position: 50% 50%;
+      background-attachment: fixed;
+
+      cursor: none;
+    }
+
+    a,
+    button,
+    input,
+    textarea {
+      cursor: none;
+    }
+
+    /* Custom Pointer */
+    .custom-cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: rgba(46, 179, 190, 0.4);
+      border: 2px solid var(--color-accent-2);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 10000;
+      transition: width 0.2s, height 0.2s, background-color 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 15px rgba(46, 179, 190, 0.5);
+      mix-blend-mode: screen;
+    }
+
+    .custom-cursor.hover {
+      width: 45px;
+      height: 45px;
+      background-color: transparent;
+      box-shadow: 0 0 25px rgba(125, 235, 234, 0.8), inset 0 0 10px rgba(46, 179, 190, 0.5);
+      border-width: 1px;
+      border-color: var(--color-accent-3);
+    }
+
+    /* Accessibility: Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+
+      .custom-cursor {
+        display: none;
+      }
+
+      body,
+      a,
+      button,
+      input,
+      textarea {
+        cursor: auto;
+      }
+    }
+
+    /* Glitch Animation */
+    @keyframes glitch {
+
+      0%,
+      100% {
+        clip-path: none;
+        transform: none;
+      }
+
+      20% {
+        clip-path: polygon(0 15%, 100% 15%, 100% 30%, 0 30%);
+        transform: translateX(-4px);
+      }
+
+      40% {
+        clip-path: polygon(0 60%, 100% 60%, 100% 75%, 0 75%);
+        transform: translateX(4px);
+      }
+
+      60% {
+        clip-path: none;
+        transform: none;
+      }
+    }
+
+    /* Scroll Reveal Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.25, 0.8, 0.25, 1),
+        transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* Typography */
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      margin-bottom: var(--space-6);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      position: relative;
+      padding-bottom: var(--space-1);
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--color-accent);
+      transition: width 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    h2.underline-visible::after {
+      width: 60px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 10%, var(--color-accent-3) 90%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 4px 30px rgba(0, 212, 180, 0.2);
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: var(--space-2);
+    }
+
+    p {
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-2);
+      font-size: 1.125rem;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Utility Classes */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--space-3);
+    }
+
+    .section {
+      padding: var(--space-6) 0;
+      position: relative;
+      scroll-snap-align: start;
+    }
+
+    /* Seamless -> Pop up section */
+    .section .container,
+    .hero-content {
+      padding: var(--space-8) var(--space-6);
+      border-radius: 30px;
+      border: 1px solid transparent;
+      transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .section .container:hover,
+    .hero-content:hover {
+      background: rgba(4, 48, 76, 0.5);
+      /* Dark Blue */
+      border-color: rgba(125, 235, 234, 0.6);
+      /* border shine */
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), inset 0 0 25px rgba(125, 235, 234, 0.15);
+      transform: translateY(-8px) scale(1.01);
+    }
+
+    .section-label {
+      font-family: var(--font-heading);
+      font-size: 0.875rem;
+      text-transform: capitalize;
+      letter-spacing: 3px;
+      color: var(--color-accent-2);
+      margin-bottom: var(--space-2);
+      display: inline-block;
+      position: relative;
+    }
+
+    .section-label::before {
+      content: '> ';
+      color: var(--color-accent);
+    }
+
+    .section-label::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 40%;
+      height: 2px;
+      background: var(--color-accent-3);
+      box-shadow: 0 0 10px var(--color-accent-3);
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
+    .section:hover .section-label::after {
+      width: 100%;
+    }
+
+    /* Buttons — Cyberpunk Clip-Path */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 14px 32px;
+      position: relative;
+      border: none;
+      background: transparent;
+      cursor: none;
+      clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: var(--color-accent);
+      color: var(--color-bg-base);
+    }
+
+    .btn-primary:hover {
+      background: var(--color-accent-3);
+      box-shadow: 0 0 30px rgba(0, 212, 180, 0.7);
+      transform: translateY(-3px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--color-accent);
+      outline: 2px solid var(--color-accent);
+      outline-offset: -2px;
+    }
+
+    .btn-outline:hover {
+      background: rgba(0, 212, 180, 0.1);
+      box-shadow: 0 0 20px rgba(0, 212, 180, 0.4);
+      transform: translateY(-3px);
+    }
+
+    .btn-full {
+      width: 100%;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--color-bg-panel);
+      border: 1px solid var(--color-border);
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: var(--space-4);
+      transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at top right, rgba(125, 235, 234, 0.1), transparent 50%);
+      pointer-events: none;
+    }
+
+    .card:hover {
+      transform: translateY(-12px) scale(1.05) perspective(1000px) rotateX(2deg) rotateY(2deg);
+      border-color: rgba(125, 235, 234, 0.8);
+      /* border shine on element interact */
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(11, 98, 121, 0.8);
+      z-index: 10;
+    }
+
+    /* Dynamic Island Navbar */
+    .navbar {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 95%;
+      max-width: 1400px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      background: rgba(3, 13, 26, 0.75);
+      backdrop-filter: blur(25px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 40px;
+      /* rounded edges dynamic island */
+      z-index: 1000;
+      transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      padding: 0 var(--space-4);
+      /* inner padding */
+    }
+
+    .navbar.hidden {
+      transform: translate(-50%, -150%);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      transition: transform 0.3s ease;
+      margin-left: 0;
+      /* far left */
+    }
+
+    .nav-logo:hover {
+      transform: scale(1.05);
+    }
+
+    .nav-logo img {
+      height: 50px;
+      width: 50px;
+      object-fit: contain;
+      border-radius: 50%;
+      box-shadow: 0 0 15px rgba(125, 235, 234, 0.4);
+    }
+
+    .nav-logo span {
+      font-family: var(--font-heading);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      justify-content: space-between;
+      /* equally spaced */
+      align-items: center;
+      width: 35%;
+      /* last 1/3rd */
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--color-text-muted);
+      position: relative;
+      padding: var(--space-1) var(--space-3);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      border-radius: 20px;
+      border: 1px solid transparent;
+    }
+
+    /* Pop up button effect */
+    .nav-links a:hover {
+      color: var(--color-text-main);
+      background: rgba(11, 98, 121, 0.6);
+      border-color: rgba(125, 235, 234, 0.6);
+      transform: scale(1.15) translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(125, 235, 234, 0.3);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--color-text-main);
+      font-size: 2rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding-top: 120px;
+      scroll-snap-align: start;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+    }
+
+    /* Premium White Heading — Glitch Effect */
+    h1.hero-heading-white {
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      font-weight: 900;
+      margin-bottom: var(--space-4);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #ffffff;
+      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.8), 0 2px 5px rgba(255, 255, 255, 0.3);
+      animation: glitch 1.2s ease-out 0.5s 1;
+    }
+
+    .tag-pill {
+      display: inline-block;
+      padding: var(--space-1) var(--space-3);
+      border: 1px solid rgba(125, 235, 234, 0.5);
+      border-radius: 30px;
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--color-text-main);
+      background: linear-gradient(90deg, rgba(11, 98, 121, 0.4), rgba(46, 179, 190, 0.2));
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), inset 0 0 10px rgba(125, 235, 234, 0.2);
+      margin-bottom: var(--space-4);
+      text-transform: uppercase;
+      backdrop-filter: blur(5px);
+      transition: transform 0.3s;
+    }
+
+    .tag-pill:hover {
+      transform: translateY(-2px) scale(1.05);
+    }
+
+    .hero p.subtext {
+      font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+      color: #ffffff;
+      margin-bottom: var(--space-6);
+      font-weight: 500;
+      text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9);
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-4);
+      margin-top: var(--space-8);
+    }
+
+    .stat-number {
+      font-size: 4rem;
+      background: linear-gradient(to bottom, #ffffff, var(--color-accent-3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: var(--space-1);
+      filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.5));
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--color-text-muted);
+    }
+
+    /* Team Grid */
+    .team-subheading {
+      width: 100%;
+      font-size: 2rem;
+      margin-top: var(--space-6);
+      margin-bottom: var(--space-4);
+      color: var(--color-text-main);
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: var(--space-2);
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: var(--space-5);
+    }
+
+    @media (min-width: 768px) {
+      .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .team-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .team-card {
+      text-align: center;
+      padding: var(--space-5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .team-img-placeholder {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto var(--space-4);
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-bg-alt), var(--color-accent-dark));
+      border: 3px solid rgba(125, 235, 234, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(0, 0, 0, 0.5);
+      transition: all 0.4s ease;
+      overflow: hidden;
+    }
+
+    .team-img-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 50%;
+      transition: transform 0.4s ease;
+    }
+
+    .team-card:hover .team-img-placeholder {
+      border-color: var(--color-accent-3);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(125, 235, 234, 0.2);
+      transform: scale(1.05) rotate(5deg);
+    }
+
+    .team-card:hover .team-img-placeholder img {
+      transform: scale(1.1);
+    }
+
+
+
+    .team-role {
+      font-size: 1rem;
+      color: var(--color-accent-3);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-top: var(--space-1);
+      font-weight: bold;
+    }
+
+    /* Events */
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: var(--space-5);
+    }
+
+    .event-date {
+      color: var(--color-accent-3);
+      font-size: 1rem;
+      margin-bottom: var(--space-2);
+      display: block;
+      letter-spacing: 1px;
+      text-shadow: 0 0 10px rgba(125, 235, 234, 0.3);
+    }
+
+    .event-badge {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 0.875rem;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-3);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Partners */
+    .partners-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--space-4);
+    }
+
+    .partner-logo-ph {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto var(--space-3);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: var(--color-text-muted);
+      transition: all 0.3s;
+    }
+
+    .partner-card:hover .partner-logo-ph {
+      background: rgba(125, 235, 234, 0.1);
+      border-color: var(--color-accent-3);
+      color: var(--color-text-main);
+      transform: scale(1.1) rotate(-5deg);
+      box-shadow: 0 0 20px rgba(125, 235, 234, 0.3);
+    }
+
+    /* Contact */
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-10);
+    }
+
+    .contact-label {
+      font-size: 1rem;
+      color: var(--color-accent-3);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: var(--space-1);
+    }
+
+    .contact-value {
+      font-size: 1.5rem;
+      color: var(--color-text-main);
+      margin-bottom: var(--space-6);
+      display: block;
+      transition: color 0.3s;
+    }
+
+    .contact-value:hover {
+      color: var(--color-accent-2);
+      text-shadow: 0 0 10px rgba(46, 179, 190, 0.5);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: var(--space-3);
+    }
+
+    .form-group label {
+      font-size: 1rem;
+      margin-bottom: var(--space-1);
+      color: var(--color-text-muted);
+    }
+
+    .form-control {
+      background: rgba(4, 48, 76, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: var(--space-3);
+      color: var(--color-text-main);
+      font-family: var(--font-body);
+      font-size: 1.125rem;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--color-accent-3);
+      background: rgba(11, 98, 121, 0.4);
+      box-shadow: 0 0 15px rgba(125, 235, 234, 0.3), inset 0 2px 5px rgba(0, 0, 0, 0.4);
+      transform: scale(1.02);
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 150px;
+    }
+
+    /* Footer */
+    .footer {
+      background: rgba(3, 13, 26, 0.95);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: var(--space-8) 0;
+      position: relative;
+      scroll-snap-align: start;
+    }
+
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--color-accent-2), transparent);
+      opacity: 0.5;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+    }
+
+    .footer-brand {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: var(--space-5);
+    }
+
+    .footer-links a {
+      color: var(--color-text-muted);
+      font-size: 1.125rem;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--color-accent-3);
+      text-shadow: 0 0 10px rgba(125, 235, 234, 0.5);
+    }
+
+    .footer-copy {
+      font-size: 1rem;
+      color: var(--color-text-muted);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1024px) {
+      .nav-links {
+        width: auto;
+        gap: var(--space-2);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        width: 100%;
+        top: 0;
+        border-radius: 0;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: rgba(3, 13, 26, 0.95);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: var(--space-5);
+        border-bottom: 1px solid var(--color-border);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .section .container {
+        padding: var(--space-4) var(--space-2);
+      }
+    }
+
+    /* Part 3 — Scroll-Triggered Entrance Animation Classes */
+    .will-animate {
+      opacity: 0;
+      transition-property: opacity, transform, letter-spacing;
+    }
+
+    .animated {
+      opacity: 1 !important;
+      transform: none !important;
+      letter-spacing: inherit !important;
+    }
+
+    /* Part 4 — Hero Rise Keyframe */
+    @keyframes heroRise {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-layer {
+      opacity: 0;
+      animation-fill-mode: forwards;
+      will-change: transform, opacity;
+    }
+
+    .hero-layer:nth-child(1) {
+      animation: heroRise 0.7s ease 0.2s forwards;
+    }
+
+    .hero-layer:nth-child(2) {
+      animation: heroRise 0.8s ease 0.5s forwards;
+    }
+
+    .hero-layer:nth-child(3) {
+      animation: heroRise 0.7s ease 0.9s forwards;
+    }
+
+    .hero-layer:nth-child(4) {
+      animation: heroRise 0.6s cubic-bezier(0.22, 1, 0.36, 1) 1.2s forwards;
+    }
+
+    /* Respect reduced motion for hero animations */
+    @media (prefers-reduced-motion: reduce) {
+      .hero-layer {
+        opacity: 1;
+        animation: none;
+      }
+
+      .will-animate {
+        opacity: 1;
+        transition: none;
+      }
+    }
+
+    /* Fix 1 — Legacy section spacing */
+    #legacy {
+      margin-top: 120px;
+      position: relative;
+      z-index: 1;
+    }
+
+    #legacy>.container {
+      padding-top: 40px;
+    }
+
+    /* Part 5 — Timeline */
+    .timeline {
+      position: relative;
+      padding: 40px 0;
+    }
+
+    .timeline-track {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 8px;
+      background: rgba(125, 235, 234, 0.08);
+      transform: translateX(-50%);
+      border-radius: 4px;
+      z-index: 0;
+    }
+
+    .timeline-fill {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: 8px;
+      height: 0%;
+      background: linear-gradient(to bottom, #00d4b4, #2eb3be);
+      transform: translateX(-50%);
+      border-radius: 4px;
+      z-index: 1;
+      transition: height 0.08s linear;
+    }
+
+    .timeline-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      margin-bottom: var(--space-10);
+      position: relative;
+    }
+
+    .timeline-item.tl-left {
+      flex-direction: row;
+    }
+
+    .timeline-item.tl-right {
+      flex-direction: row-reverse;
+    }
+
+    .timeline-year {
+      flex: 1;
+      font-family: var(--font-heading);
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      font-weight: 900;
+      color: rgba(255, 255, 255, 0.06);
+      text-align: center;
+      letter-spacing: 2px;
+      transition: color 0.5s ease, text-shadow 0.5s ease;
+      user-select: none;
+    }
+
+    .timeline-item.tl-active .timeline-year {
+      color: rgba(125, 235, 234, 0.45);
+      text-shadow: 0 0 50px rgba(0, 212, 180, 0.25);
+    }
+
+    .timeline-node {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--color-bg-base);
+      border: 2px solid rgba(125, 235, 234, 0.25);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 2;
+      margin: 0 -13px;
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .timeline-item.tl-active .timeline-node {
+      background: var(--color-accent);
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 6px rgba(0, 212, 180, 0.15), 0 0 25px rgba(0, 212, 180, 0.7);
+      transform: scale(1.5);
+    }
+
+    .timeline-card {
+      flex: 1;
+      opacity: 0;
+      transform: translateX(50px);
+      transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+      padding: var(--space-3);
+    }
+
+    .timeline-item.tl-right .timeline-card {
+      transform: translateX(-50px);
+    }
+
+    .timeline-item.tl-active .timeline-card {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (max-width: 768px) {
+
+      .timeline-track,
+      .timeline-fill {
+        left: 24px;
+        width: 8px;
+      }
+
+      .timeline-item.tl-left,
+      .timeline-item.tl-right {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 60px;
+      }
+
+      .timeline-year {
+        font-size: 2.2rem;
+        text-align: left;
+        flex: none;
+        margin-bottom: var(--space-1);
+      }
+
+      .timeline-node {
+        position: absolute;
+        left: 15px;
+        top: 8px;
+        margin: 0;
+      }
+
+      .timeline-card {
+        transform: translateX(20px);
+        width: 100%;
+      }
+    }
+
+    /* Part 6 — Nav Active Link */
+    .nav-links a.nav-active {
+      color: var(--color-accent);
+      background: rgba(0, 212, 180, 0.12);
+      border: 1px solid rgba(0, 212, 180, 0.4);
+      border-radius: 8px;
+      padding: 6px 14px;
+      box-shadow: 0 0 12px rgba(0, 212, 180, 0.15);
+    }
+
+    /* Disable lift on legacy container so cards don't overlap navbar */
+    #legacy>.container:hover {
+      transform: none;
+    }
+
+    .nav-join {
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Custom Pointer -->
+  <div class="custom-cursor" id="customCursor"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#" class="nav-logo">
+        <img src="Theme and Brand Design/Club Theme/Tech Club 2k26 Logo.jpeg" alt="Logo">
+        <span>GIIS Tech Club</span>
+      </a>
+      <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#legacy">Legacy</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#partners">Partners</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="#contact" class="btn btn-primary nav-join" style="font-size: 0.7rem; padding: 10px 20px;">Join Club</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero" id="home">
+    <div class="container hero-content">
+      <div class="hero-layer">
+        <div class="tag-pill">Official Website of GIIS Tech Club</div>
+      </div>
+      <div class="hero-layer">
+        <h1 class="hero-heading-white">GIIS Tech Club<br><span style="display: block;">2K26</span></h1>
+      </div>
+      <div class="hero-layer">
+        <p class="subtext">
+          Innovate. Initiate. Inspire.
+        </p>
+      </div>
+      <div class="hero-layer">
+        <div class="hero-buttons">
+          <a href="#about" class="btn btn-primary">Explore More</a>
+          <a href="#contact" class="btn btn-outline">Initiate Connection</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- About Section -->
+  <section class="section" id="about">
+    <div class="container">
+      <span class="section-label">System Overview</span>
+      <h2 class="gradient-text">About GIIS Tech Club</h2>
+      <div>
+        <p>
+          GIIS Tech Club is the premier computing and innovation society run by students, for students. Our mission is
+          to bridge the gap between theoretical knowledge and real-world engineering, providing a collaborative sandbox
+          for aspiring developers, designers, and innovators.
+        </p>
+        <p>
+          We organize hackathons, specialized bootcamps, and technical symposiums designed to elevate the skillsets of
+          our members. From artificial intelligence architectures to scalable web platforms, we explore the tools
+          shaping tomorrow's industry.
+        </p>
+        <p>
+          Joining our ranks means becoming part of a driven community of problem-solvers. Whether you are writing your
+          first line of Python or optimizing distributed server deployments, the GIIS Tech Club provides the resources,
+          mentorship, and network to scale your potential.
+        </p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="card stat-card">
+          <div class="stat-number">120+</div>
+          <div class="stat-label">Active Members</div>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-number">24</div>
+          <div class="stat-label">Events Held</div>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-number">40</div>
+          <div class="stat-label">Projects Built</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="section" id="team">
+    <div class="container">
+      <span class="section-label">Leadership</span>
+      <h2 class="gradient-text">Meet Our Team</h2>
+
+      <!-- Core -->
+      <h3 class="team-subheading">Core</h3>
+      <div class="team-grid">
+        <div class="card team-card">
+          <div class="team-img-placeholder"><img src="Theme and Brand Design/Tech Club OT Pics/Duaa Single.jpg"
+              alt="Duaa Ahmed Sherief"></div>
+          <h3>Duaa Ahmed Sherief</h3>
+          <div class="team-role">Vice President</div>
+        </div>
+        <div class="card team-card">
+          <div class="team-img-placeholder"><img src="Theme and Brand Design/Tech Club OT Pics/Anuraag Single.png"
+              alt="Anuraag Vombatkere" style="object-position: 35% top;"></div>
+          <h3>Anuraag Vombatkere</h3>
+          <div class="team-role">President</div>
+        </div>
+        <div class="card team-card">
+          <div class="team-img-placeholder"><img src="Theme and Brand Design/Tech Club OT Pics/Ansh Single copy.png"
+              alt="Ansh Vaibhav Sanghavi" style="object-position: 50% 50%;"></div>
+          <h3>Ansh Vaibhav Sanghavi</h3>
+          <div class="team-role">Secretary</div>
+        </div>
+      </div>
+
+      <!-- Academics -->
+      <h3 class="team-subheading">Academics</h3>
+      <div class="team-grid">
+        <div class="card team-card">
+          <div class="team-img-placeholder"><img src="Theme and Brand Design/Tech Club OT Pics/Vasipalli Single.jpg"
+              alt="Vasipalli Eshan Aditya"></div>
+          <h3>Vasipalli Eshan Aditya</h3>
+        </div>
+        <div class="card team-card">
+          <div class="team-img-placeholder"><img src="Theme and Brand Design/Tech Club OT Pics/Raahi Single.png"
+              alt="Raahi Chedda"></div>
+          <h3>Raahi Chedda</h3>
+        </div>
+        <div class="card team-card">
+          <div class="team-img-placeholder"><img src="Theme and Brand Design/Tech Club OT Pics/Siddharth Single.png"
+              alt="Siddharth Bansal"></div>
+          <h3>Siddharth Bansal</h3>
+        </div>
+      </div>
+
+      <!-- Design & Marketing -->
+      <h3 class="team-subheading">Design & Marketing</h3>
+      <div class="team-grid">
+        <div class="card team-card">
+          <div class="team-img-placeholder"><img src="Theme and Brand Design/Tech Club OT Pics/Chinmay Single.jpg"
+              alt="Chinmay Jyotish"></div>
+          <h3>Chinmay Jyotish</h3>
+        </div>
+        <div class="card team-card">
+          <div class="team-img-placeholder"><img src="Theme and Brand Design/Tech Club OT Pics/Likitha Single.jpg"
+              alt="Likita Reddy Kodi"></div>
+          <h3>Likita Reddy Kodi</h3>
+        </div>
+      </div>
+
+      <!-- Event Management -->
+      <h3 class="team-subheading">Event Management</h3>
+      <div class="team-grid">
+        <div class="card team-card">
+          <div class="team-img-placeholder"><img src="Theme and Brand Design/Tech Club OT Pics/Sanjana Single.jpg"
+              alt="Sanjana Sandeep Mallya"></div>
+          <h3>Sanjana Sandeep Mallya</h3>
+        </div>
+        <div class="card team-card">
+          <div class="team-img-placeholder"><img
+              src="Theme and Brand Design/Tech Club OT Pics/Diya Vishwanath Single.jpg" alt="Diya Vishwanath"></div>
+          <h3>Diya Vishwanath</h3>
+        </div>
+      </div>
+
+      <!-- Finance & Logistics -->
+      <h3 class="team-subheading">Finance & Logistics</h3>
+      <div class="team-grid">
+        <div class="card team-card">
+          <div class="team-img-placeholder"><img src="Theme and Brand Design/Tech Club OT Pics/Madhav Single.png"
+              alt="Madhav Sikri"></div>
+          <h3>Madhav Sikri</h3>
+        </div>
+        <div class="card team-card">
+          <div class="team-img-placeholder"><img src="Theme and Brand Design/Tech Club OT Pics/Atharva Single.png"
+              alt="Atharva Kaushal"></div>
+          <h3>Atharva Kaushal</h3>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Legacy Timeline Section -->
+  <section class="section" id="legacy">
+    <div class="container">
+      <span class="section-label">Club History</span>
+      <h2 class="gradient-text">Our Legacy</h2>
+
+      <div class="timeline">
+        <div class="timeline-track"></div>
+        <div class="timeline-fill"></div>
+
+        <div class="timeline-item tl-left">
+          <div class="timeline-year">2022</div>
+          <div class="timeline-node"></div>
+          <div class="timeline-card card">
+            <h3>GIIS Tech Club Founded</h3>
+            <p>The club was established with 30 founding members, hosted the first internal hackathon, and ignited a
+              campus-wide culture of innovation.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item tl-right">
+          <div class="timeline-year">2023</div>
+          <div class="timeline-node"></div>
+          <div class="timeline-card card">
+            <h3>First Inter-School Hackathon</h3>
+            <p>The club expanded reach beyond GIIS, over 100 participants from 5 schools competed, and the team took
+              home Best UI Design.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item tl-left">
+          <div class="timeline-year">2024</div>
+          <div class="timeline-node"></div>
+          <div class="timeline-card card">
+            <h3>AI and Robotics Division Launched</h3>
+            <p>Dedicated tracks for machine learning and robotics were introduced and mentorship partnerships with two
+              tech companies were secured.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item tl-right">
+          <div class="timeline-year">2025</div>
+          <div class="timeline-node"></div>
+          <div class="timeline-card card">
+            <h3>150 Members and Website Launch</h3>
+            <p>The club crossed 150 active members, launched the official GIIS Tech Club website, and debuted the annual
+              Tech Summit event.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item tl-left">
+          <div class="timeline-year">2026</div>
+          <div class="timeline-node"></div>
+          <div class="timeline-card card">
+            <h3>GIIS Tech Club 2K26</h3>
+            <p>This is the most ambitious chapter yet, building next-gen projects, expanding partnerships, and pushing
+              the boundaries of what student-led innovation can achieve at GIIS.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Events Section -->
+  <section class="section" id="events">
+    <div class="container">
+      <span class="section-label">Scheduled Transmissions</span>
+      <h2 class="gradient-text">Upcoming & Past Events</h2>
+
+      <div class="events-grid">
+        <div class="card event-card">
+          <span class="event-date">Oct 15, 2026</span>
+          <h3>Hackathon 2026</h3>
+          <p>A 48-hour competitive coding event featuring industry sponsors, challenging problem statements, and epic
+            prizes.</p>
+          <a href="#" class="btn btn-outline" style="margin-top: auto;">View Details</a>
+        </div>
+
+        <div class="card event-card">
+          <span class="event-date">Nov 02, 2026</span>
+          <h3>AI & Machine Learning Workshop</h3>
+          <p>An introductory session on neural networks, model training, and building your first AI classifier using
+            Python.</p>
+          <a href="#" class="btn btn-outline" style="margin-top: auto;">View Details</a>
+        </div>
+
+        <div class="card event-card">
+          <span class="event-badge">Completed</span>
+          <span class="event-date">Mar 10, 2026</span>
+          <h3>Web Dev Bootcamp</h3>
+          <p>A comprehensive masterclass on modern frontend architectures, responsive design, and component-driven UI.
+          </p>
+          <a href="#" class="btn btn-outline" style="margin-top: auto;">View Details</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partners Section -->
+  <section class="section" id="partners">
+    <div class="container">
+      <h2 class="gradient-text">Sponsors & Partners</h2>
+
+      <div class="partners-grid">
+        <div class="card partner-card">
+          <div class="partner-logo-ph">GI</div>
+          <h3>Global Innovators</h3>
+          <p>Technology sponsor</p>
+        </div>
+        <div class="card partner-card">
+          <div class="partner-logo-ph">SX</div>
+          <h3>SyntheX Corp</h3>
+          <p>Hackathon partner</p>
+        </div>
+        <div class="card partner-card">
+          <div class="partner-logo-ph">CN</div>
+          <h3>CodeNexus</h3>
+          <p>Platform provider</p>
+        </div>
+        <div class="card partner-card">
+          <div class="partner-logo-ph">VC</div>
+          <h3>Vector Cloud</h3>
+          <p>Infrastructure</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section" id="contact">
+    <div class="container contact-wrapper">
+      <div class="contact-info">
+        <span class="section-label">Communication Channel</span>
+        <h2 class="gradient-text">Contact Us</h2>
+        <p>Interested in collaborating or joining our ranks? Reach out to our operations team for a scheduled briefing.
+        </p>
+
+        <div style="margin-top: var(--space-8);">
+          <div class="contact-label">Electronic Mail</div>
+          <a href="mailto:support@giistech.club" class="contact-value">support@giistech.club</a>
+        </div>
+      </div>
+
+      <div class="contact-form-container">
+        <div class="card">
+          <form onsubmit="event.preventDefault(); alert('Transmission Sent!');">
+            <div class="form-group">
+              <label for="name">Subject Name</label>
+              <input type="text" id="name" class="form-control" required placeholder="Enter your designation">
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" class="form-control" required placeholder="sys.admin@domain.com">
+            </div>
+            <div class="form-group">
+              <label for="message">Encryption (Message)</label>
+              <textarea id="message" class="form-control" required
+                placeholder="Enter transmission payload..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full" style="margin-top: var(--space-2)">Send
+              Transmission</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-brand">GIIS TECH CLUB</div>
+      <div class="footer-links">
+        <a href="#">Discord</a>
+        <a href="#">GitHub</a>
+        <a href="#">Instagram</a>
+        <a href="#">LinkedIn</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 GIIS Tech Club.</div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Custom Cursor Logic
+    if (!prefersReducedMotion) {
+      const cursor = document.getElementById('customCursor');
+
+      let mouseX = 0, mouseY = 0;
+      document.addEventListener('mousemove', (e) => {
+        // slight direct follow logic for immediate feel
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+      });
+
+      const interactiveElements = document.querySelectorAll('a, button, input, textarea, .card');
+      interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+      });
+    }
+
+    // Background Liquid Flow Parallax Effect
+    if (!prefersReducedMotion) {
+      window.addEventListener('scroll', () => {
+        const maxScroll = Math.max(1, document.body.scrollHeight - window.innerHeight);
+        const scrollFraction = window.pageYOffset / maxScroll;
+        // Shift background slightly to make the gradient flow
+        document.body.style.backgroundPosition = `50% ${50 + (scrollFraction * 30)}%`;
+
+        // Part 4 — Hero Parallax Depth-of-Field Layering
+        const heroLayers = document.querySelectorAll('.hero-layer');
+        const rates = [0.08, 0.12, 0.16, 0.20];
+        heroLayers.forEach((layer, i) => {
+          const rate = rates[i] || 0;
+          layer.style.transform = `translateY(${window.pageYOffset * rate}px)`;
+        });
+
+      });
+    }
+
+    // Part 5 — Timeline Fill on Scroll (always active, not gated by reduced-motion)
+    window.addEventListener('scroll', () => {
+      const tlFill = document.querySelector('.timeline-fill');
+      const tlEl = document.querySelector('.timeline');
+      if (tlFill && tlEl) {
+        const tlRect = tlEl.getBoundingClientRect();
+        const tlHeight = tlEl.offsetHeight;
+        const triggerPoint = window.innerHeight * 0.6;
+        const scrolled = Math.max(0, triggerPoint - tlRect.top);
+        const progress = Math.min(1, scrolled / tlHeight);
+        tlFill.style.height = (progress * 100) + '%';
+
+        document.querySelectorAll('.timeline-item').forEach(item => {
+          if (item.getBoundingClientRect().top < window.innerHeight * 0.68) {
+            item.classList.add('tl-active');
+          }
+        });
+      }
+    });
+
+    // Dynamic Island Navbar Shrink/Hide Effect
+    const navbar = document.getElementById('navbar');
+    let lastScroll = 0;
+
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+
+      if (currentScroll > 50) {
+        navbar.style.background = 'rgba(3, 13, 26, 0.9)';
+      } else {
+        navbar.style.background = 'rgba(3, 13, 26, 0.75)';
+      }
+
+      if (currentScroll <= 0) {
+        navbar.classList.remove('hidden');
+        return;
+      }
+
+      if (currentScroll > lastScroll && !navbar.classList.contains('hidden') && currentScroll > 200) {
+        navbar.classList.add('hidden');
+      } else if (currentScroll < lastScroll && navbar.classList.contains('hidden')) {
+        navbar.classList.remove('hidden');
+      }
+      lastScroll = currentScroll;
+    });
+
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
+    });
+
+    // Part 3 — Scroll-Triggered Entrance Animations
+    if (!prefersReducedMotion) {
+      document.addEventListener('DOMContentLoaded', () => {
+        // Query all target elements inside .section
+        const cards = document.querySelectorAll('.section .card');
+        const headings = document.querySelectorAll('.section h2');
+        const sectionLabels = document.querySelectorAll('.section .section-label');
+        const paragraphs = document.querySelectorAll('.section p');
+
+        // Add will-animate and set initial inline styles
+        cards.forEach(card => {
+          card.classList.add('will-animate');
+          card.style.transform = 'translateY(40px)';
+        });
+
+        headings.forEach(h => {
+          h.classList.add('will-animate');
+          h.style.transform = 'translateX(-30px)';
+        });
+
+        sectionLabels.forEach(lbl => {
+          lbl.classList.add('will-animate');
+          lbl.style.letterSpacing = '6px';
+        });
+
+        paragraphs.forEach(p => {
+          p.classList.add('will-animate');
+        });
+
+        // Single IntersectionObserver for all targets
+        const entranceObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const el = entry.target;
+
+              if (el.classList.contains('card')) {
+                // Stagger cards by index within their parent grid
+                const parent = el.parentElement;
+                const siblings = Array.from(parent.querySelectorAll('.card'));
+                const idx = siblings.indexOf(el);
+                el.style.transitionDuration = '0.6s';
+                el.style.transitionTimingFunction = 'cubic-bezier(0.22, 1, 0.36, 1)';
+                el.style.transitionDelay = (idx * 100) + 'ms';
+              } else if (el.tagName === 'H2') {
+                el.style.transitionDuration = '0.7s';
+                el.style.transitionTimingFunction = 'ease';
+                el.style.transitionDelay = '0ms';
+              } else if (el.classList.contains('section-label')) {
+                el.style.transitionDuration = '0.5s';
+                el.style.transitionTimingFunction = 'ease';
+                el.style.transitionDelay = '0ms';
+              } else if (el.tagName === 'P') {
+                el.style.transitionDuration = '0.8s';
+                el.style.transitionTimingFunction = 'ease';
+                el.style.transitionDelay = '200ms';
+              }
+
+              el.classList.add('animated');
+              entranceObserver.unobserve(el);
+            }
+          });
+        }, { threshold: 0.15 });
+
+        // Observe all targets
+        cards.forEach(el => entranceObserver.observe(el));
+        headings.forEach(el => entranceObserver.observe(el));
+        sectionLabels.forEach(el => entranceObserver.observe(el));
+        paragraphs.forEach(el => entranceObserver.observe(el));
+      });
+
+      // Animated underline on h2 headings
+      const h2Elements = document.querySelectorAll('h2');
+      const h2Observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('underline-visible');
+            h2Observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+
+      h2Elements.forEach(el => h2Observer.observe(el));
+
+      // Part 6 — Active Nav Link Highlighting
+      const sections = document.querySelectorAll('section[id], header[id]');
+      const navAs = document.querySelectorAll('#navLinks a');
+
+      const navActiveObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            navAs.forEach(a => a.classList.remove('nav-active'));
+            const match = document.querySelector(`#navLinks a[href="#${entry.target.id}"]`);
+            if (match) match.classList.add('nav-active');
+          }
+        });
+      }, { threshold: 0.4 });
+
+      sections.forEach(sec => navActiveObserver.observe(sec));
+    }
+  </script>
+</body>
+
+</html>
