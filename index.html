@@ -1374,26 +1374,38 @@
 
       <div class="events-grid">
         <div class="card event-card">
-          <span class="event-date">Oct 15, 2026</span>
-          <h3>Hackathon 2026</h3>
-          <p>A 48-hour competitive coding event featuring industry sponsors, challenging problem statements, and epic
-            prizes.</p>
+          <span class="event-date">April 15, 2026</span>
+          <h3>Game Development Workshop</h3>
+          <p>Centered around GDevelop – a no-code software
+            Participants will be taught how to find assets, add character movement, and implement different game
+            mechanics, such as hit boxes.</p>
           <a href="#" class="btn btn-outline" style="margin-top: auto;">View Details</a>
         </div>
 
         <div class="card event-card">
-          <span class="event-date">Nov 02, 2026</span>
-          <h3>AI & Machine Learning Workshop</h3>
-          <p>An introductory session on neural networks, model training, and building your first AI classifier using
-            Python.</p>
+          <span class="event-date">April 22, 2026</span>
+          <h3>App Development Workshop</h3>
+          <p>Building mobile apps using MIT App Inventor and Kodular
+            Participants will learn basic UI design, user interaction and block- based logic
+            Can create and test your own simple Android app.</p>
           <a href="#" class="btn btn-outline" style="margin-top: auto;">View Details</a>
         </div>
 
         <div class="card event-card">
-          <span class="event-badge">Completed</span>
-          <span class="event-date">Mar 10, 2026</span>
-          <h3>Web Dev Bootcamp</h3>
-          <p>A comprehensive masterclass on modern frontend architectures, responsive design, and component-driven UI.
+          <span class="event-date">April 29, 2026</span>
+          <h3>Web Dev Workshop</h3>
+          <p>Comprehensive workshop including HTML, CSS and JS
+            Students can learn to build a simple portfolio website
+          </p>
+          <a href="#" class="btn btn-outline" style="margin-top: auto;">View Details</a>
+        </div>
+
+        <div class="card event-card">
+          <span class="event-date">June 3, 2026</span>
+          <h3>Python Programming Workshop</h3>
+          <p>Basics of Python, including variables, input/ output, loops and so on
+            Help develop logical thinking by building small interactive programs
+            Solve simple real- world problems.
           </p>
           <a href="#" class="btn btn-outline" style="margin-top: auto;">View Details</a>
         </div>
@@ -1408,24 +1420,17 @@
 
       <div class="partners-grid">
         <div class="card partner-card">
-          <div class="partner-logo-ph">GI</div>
-          <h3>Global Innovators</h3>
-          <p>Technology sponsor</p>
+          <img src="Hack CLub Logo.png" alt="Hack Club Logo"
+            style="width: 80px; height: 80px; object-fit: contain; margin-bottom: var(--space-2);">
+          <h3>Hack Club</h3>
+          <h4>Affiliated with Hack Club</h4>
         </div>
         <div class="card partner-card">
-          <div class="partner-logo-ph">SX</div>
-          <h3>SyntheX Corp</h3>
-          <p>Hackathon partner</p>
-        </div>
-        <div class="card partner-card">
-          <div class="partner-logo-ph">CN</div>
-          <h3>CodeNexus</h3>
-          <p>Platform provider</p>
-        </div>
-        <div class="card partner-card">
-          <div class="partner-logo-ph">VC</div>
-          <h3>Vector Cloud</h3>
-          <p>Infrastructure</p>
+          <img src="DBS Logo.png" alt="DBS Logo"
+            style="width: 80px; height: 80px; object-fit: contain; margin-bottom: var(--space-2);">
+          <h3>DBS</h3>
+          <h4>Hackathon X Sponsor</h4>
+          <p>(Past sponsor)</p>
         </div>
       </div>
     </div>
@@ -1448,14 +1453,15 @@
 
       <div class="contact-form-container">
         <div class="card">
-          <form onsubmit="event.preventDefault(); alert('Transmission Sent!');">
+          <form
+            onsubmit="event.preventDefault(); window.location.href='mailto:support@giistech.club?subject=' + encodeURIComponent('Contact Form Submission: ' + document.getElementById('name').value) + '&body=' + encodeURIComponent('From: ' + document.getElementById('email').value + '\n\n' + document.getElementById('message').value); alert('Transmission Sent!');">
             <div class="form-group">
               <label for="name">Subject Name</label>
               <input type="text" id="name" class="form-control" required placeholder="Enter your designation">
             </div>
             <div class="form-group">
               <label for="email">Email Address</label>
-              <input type="email" id="email" class="form-control" required placeholder="sys.admin@domain.com">
+              <input type="email" id="email" class="form-control" required placeholder="abcd1234.@domain.com">
             </div>
             <div class="form-group">
               <label for="message">Encryption (Message)</label>
@@ -1473,12 +1479,15 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container footer-content">
-      <div class="footer-brand">GIIS TECH CLUB</div>
+      <a href="#" class="nav-logo">
+        <img src="Theme and Brand Design/Club Theme/Tech Club 2k26 Logo.jpeg" alt="Logo">
+        <span>GIIS Tech Club</span>
+      </a>
       <div class="footer-links">
-        <a href="#">Discord</a>
-        <a href="#">GitHub</a>
-        <a href="#">Instagram</a>
-        <a href="#">LinkedIn</a>
+        <a href="https://www.instagram.com/giistechclub/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="http://github.com/orgs/GIIS-Tech-Club/repositories" target="_blank"
+          rel="noopener noreferrer">GitHub</a>
+        <a href="http://hcb.hackclub.com/tech-club/" target="_blank" rel="noopener noreferrer">HCB</a>
       </div>
       <div class="footer-copy">&copy; 2026 GIIS Tech Club.</div>
     </div>
