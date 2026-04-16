@@ -929,11 +929,12 @@
         background: rgba(3, 13, 26, 0.98);
         backdrop-filter: blur(25px);
         flex-direction: column;
-        padding: var(--space-6) var(--space-4);
+        padding: var(--space-4) 0;
         border-bottom: 1px solid var(--color-border);
         box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9);
-        gap: var(--space-4);
+        gap: var(--space-2);
         align-items: center;
+        z-index: 1001;
       }
 
       .nav-links.active {
@@ -946,9 +947,32 @@
       }
 
       .nav-links a {
-        font-size: 1.25rem;
+        font-size: 1.15rem !important;
         display: block;
         padding: var(--space-2);
+        color: #ffffff !important;
+        letter-spacing: 1px;
+      }
+
+      .mobile-only-join {
+        display: block !important;
+        margin-top: var(--space-2);
+        max-width: 200px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* HIDE CUSTOM POINTER ON MOBILE */
+      .custom-cursor {
+        display: none !important;
+      }
+
+      body,
+      a,
+      button,
+      input,
+      textarea {
+        cursor: auto !important;
       }
 
       .nav-join {
@@ -1016,7 +1040,7 @@
 
       h1.hero-heading-white {
         font-size: min(15vw, 4rem) !important;
-        line-height: 0.85 !important;
+        line-height: 0.95 !important;
         width: 100%;
         margin-bottom: var(--space-4) !important;
         letter-spacing: -1px !important;
@@ -1024,7 +1048,7 @@
 
       h1.hero-heading-white span {
         display: inline-block !important;
-        margin-top: -10px !important;
+        margin-top: 0 !important;
         white-space: normal !important;
       }
 
@@ -1398,7 +1422,8 @@
         <div class="tag-pill">Official Website of GIIS Tech Club</div>
       </div>
       <div class="hero-layer">
-        <h1 class="hero-heading-white"><span style="white-space: nowrap;">GIIS TECH CLUB</span><br><span style="display: block; color: var(--color-accent);">2K26</span></h1>
+        <h1 class="hero-heading-white"><span style="white-space: nowrap;">GIIS TECH CLUB</span><br><span
+            style="display: block; color: var(--color-accent);">2K26</span></h1>
       </div>
       <div class="hero-layer">
         <p class="subtext">
