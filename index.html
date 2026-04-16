@@ -1117,6 +1117,30 @@
     .nav-join {
       flex-shrink: 0;
     }
+
+    /* Hero Image Sequence */
+    .hero-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(4, 48, 76, 0.3), var(--color-bg-base));
+      z-index: 0;
+      pointer-events: none;
+    }
   </style>
 </head>
 
@@ -1147,6 +1171,8 @@
 
   <!-- Hero Section -->
   <header class="hero" id="home">
+    <canvas id="heroCanvas" class="hero-canvas"></canvas>
+    <div class="hero-overlay"></div>
     <div class="container hero-content">
       <div class="hero-layer">
         <div class="tag-pill">Official Website of GIIS Tech Club</div>
@@ -1695,6 +1721,74 @@
       }, { threshold: 0.4 });
 
       sections.forEach(sec => navActiveObserver.observe(sec));
+
+      // Hero Background Image Sequence
+      const heroCanvas = document.getElementById('heroCanvas');
+      if (heroCanvas) {
+        const ctx = heroCanvas.getContext('2d');
+        const frameCount = 80;
+        const images = [];
+        const imagePath = 'Theme and Brand Design/I_dont_want_202604161215_000/I_dont_want_202604161215_';
+        
+        // Pre-load images
+        for (let i = 0; i < frameCount; i++) {
+          const img = new Image();
+          const frameIndex = i.toString().padStart(3, '0');
+          img.src = `${imagePath}${frameIndex}.jpg`;
+          images.push(img);
+        }
+
+        let currentFrame = 0;
+        let lastTime = 0;
+        const fps = 30;
+        const frameInterval = 1000 / fps;
+        let isResized = false;
+        
+        function animateHero(time) {
+          const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          
+          if (prefersReducedMotion) {
+            // Draw first frame if loaded and stop
+            if (images[0] && images[0].complete) {
+              if(!isResized && images[0].naturalWidth > 0) {
+                heroCanvas.width = images[0].naturalWidth;
+                heroCanvas.height = images[0].naturalHeight;
+                isResized = true;
+              }
+              if(isResized) ctx.drawImage(images[0], 0, 0);
+            } else {
+              // Retry until loaded
+              requestAnimationFrame(animateHero);
+            }
+            return;
+          }
+
+          requestAnimationFrame(animateHero);
+          
+          if (!lastTime) lastTime = time;
+          const delta = time - lastTime;
+          
+          if (delta >= frameInterval) {
+            lastTime = time - (delta % frameInterval);
+
+            if (images[currentFrame] && images[currentFrame].complete) {
+              if(!isResized && images[currentFrame].naturalWidth > 0) {
+                heroCanvas.width = images[currentFrame].naturalWidth;
+                heroCanvas.height = images[currentFrame].naturalHeight;
+                isResized = true;
+              }
+              if(isResized) {
+                 ctx.clearRect(0, 0, heroCanvas.width, heroCanvas.height);
+                 ctx.drawImage(images[currentFrame], 0, 0);
+              }
+            }
+            
+            currentFrame = (currentFrame + 1) % frameCount;
+          }
+        }
+        
+        requestAnimationFrame(animateHero);
+      }
     }
   </script>
 </body>
