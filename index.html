@@ -259,14 +259,20 @@
       transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
 
-    .section .container:hover,
-    .hero-content:hover {
+    .section .container:hover {
       background: rgba(4, 48, 76, 0.5);
       /* Dark Blue */
       border-color: rgba(125, 235, 234, 0.6);
       /* border shine */
       box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), inset 0 0 25px rgba(125, 235, 234, 0.15);
       transform: translateY(-8px) scale(1.01);
+    }
+
+    .hero-content:hover {
+      transform: none;
+      background: transparent;
+      border-color: transparent;
+      box-shadow: none;
     }
 
     .section-label {
@@ -392,13 +398,13 @@
       transform: translateX(-50%);
       width: 95%;
       max-width: 1400px;
-      height: 80px;
+      height: 60px;
       display: flex;
       align-items: center;
       background: rgba(3, 13, 26, 0.75);
       backdrop-filter: blur(25px);
       border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 40px;
+      border-radius: 30px;
       /* rounded edges dynamic island */
       z-index: 1000;
       transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease;
@@ -432,8 +438,8 @@
     }
 
     .nav-logo img {
-      height: 50px;
-      width: 50px;
+      height: 35px;
+      width: 35px;
       object-fit: contain;
       border-radius: 50%;
       box-shadow: 0 0 15px rgba(125, 235, 234, 0.4);
@@ -492,6 +498,7 @@
       min-height: 100vh;
       display: flex;
       align-items: center;
+      justify-content: center;
       overflow: hidden;
       padding-top: 120px;
       scroll-snap-align: start;
@@ -500,28 +507,33 @@
     .hero-content {
       position: relative;
       z-index: 1;
-      max-width: 900px;
+      max-width: 1200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
+
+
 
     /* Premium White Heading — Glitch Effect */
     h1.hero-heading-white {
-      font-size: clamp(3.5rem, 8vw, 7rem);
+      font-size: clamp(3.75rem, 8.5vw, 7.5rem);
       font-weight: 900;
       margin-bottom: var(--space-4);
       letter-spacing: 4px;
       text-transform: uppercase;
       color: #ffffff;
-      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.8), 0 2px 5px rgba(255, 255, 255, 0.3);
       animation: glitch 1.2s ease-out 0.5s 1;
     }
 
     .tag-pill {
       display: inline-block;
-      padding: var(--space-1) var(--space-3);
+      padding: 6px 16px;
       border: 1px solid rgba(125, 235, 234, 0.5);
       border-radius: 30px;
       font-family: var(--font-heading);
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       font-weight: 700;
       letter-spacing: 2px;
       color: var(--color-text-main);
@@ -538,17 +550,22 @@
     }
 
     .hero p.subtext {
-      font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+      font-size: clamp(1.35rem, 2.75vw, 1.85rem);
       color: #ffffff;
       margin-bottom: var(--space-6);
       font-weight: 500;
-      text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9);
     }
 
     .hero-buttons {
       display: flex;
-      gap: var(--space-4);
+      justify-content: center;
+      gap: var(--space-5);
       flex-wrap: wrap;
+    }
+
+    .hero-buttons .btn {
+      font-size: 0.9rem;
+      padding: 15px 34px;
     }
 
     /* Stats Grid */
@@ -828,13 +845,20 @@
 
     .footer-links a {
       color: var(--color-text-muted);
-      font-size: 1.125rem;
-      transition: color 0.3s;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: var(--space-1) var(--space-3);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      border-radius: 20px;
+      border: 1px solid transparent;
     }
 
     .footer-links a:hover {
-      color: var(--color-accent-3);
-      text-shadow: 0 0 10px rgba(125, 235, 234, 0.5);
+      color: var(--color-text-main);
+      background: rgba(11, 98, 121, 0.6);
+      border-color: rgba(125, 235, 234, 0.6);
+      transform: scale(1.1) translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(125, 235, 234, 0.3);
     }
 
     .footer-copy {
@@ -1178,11 +1202,11 @@
         <div class="tag-pill">Official Website of GIIS Tech Club</div>
       </div>
       <div class="hero-layer">
-        <h1 class="hero-heading-white">GIIS Tech Club<br><span style="display: block;">2K26</span></h1>
+        <h1 class="hero-heading-white"><span style="white-space: nowrap;">GIIS TECH CLUB</span><br><span style="display: block; color: var(--color-accent);">2K26</span></h1>
       </div>
       <div class="hero-layer">
         <p class="subtext">
-          Innovate. Initiate. Inspire.
+          Innovate. <span style="color: var(--color-accent);">Initiate.</span> Inspire.
         </p>
       </div>
       <div class="hero-layer">
@@ -1729,7 +1753,7 @@
         const frameCount = 80;
         const images = [];
         const imagePath = 'Theme and Brand Design/I_dont_want_202604161215_000/I_dont_want_202604161215_';
-        
+
         // Pre-load images
         for (let i = 0; i < frameCount; i++) {
           const img = new Image();
@@ -1739,23 +1763,24 @@
         }
 
         let currentFrame = 0;
+        let direction = 1;
         let lastTime = 0;
         const fps = 30;
         const frameInterval = 1000 / fps;
         let isResized = false;
-        
+
         function animateHero(time) {
           const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-          
+
           if (prefersReducedMotion) {
             // Draw first frame if loaded and stop
             if (images[0] && images[0].complete) {
-              if(!isResized && images[0].naturalWidth > 0) {
+              if (!isResized && images[0].naturalWidth > 0) {
                 heroCanvas.width = images[0].naturalWidth;
                 heroCanvas.height = images[0].naturalHeight;
                 isResized = true;
               }
-              if(isResized) ctx.drawImage(images[0], 0, 0);
+              if (isResized) ctx.drawImage(images[0], 0, 0);
             } else {
               // Retry until loaded
               requestAnimationFrame(animateHero);
@@ -1764,29 +1789,33 @@
           }
 
           requestAnimationFrame(animateHero);
-          
+
           if (!lastTime) lastTime = time;
           const delta = time - lastTime;
-          
+
           if (delta >= frameInterval) {
             lastTime = time - (delta % frameInterval);
 
             if (images[currentFrame] && images[currentFrame].complete) {
-              if(!isResized && images[currentFrame].naturalWidth > 0) {
+              if (!isResized && images[currentFrame].naturalWidth > 0) {
                 heroCanvas.width = images[currentFrame].naturalWidth;
-                heroCanvas.height = images[currentFrame].naturalHeight;
+                heroCanvas.height = images[0].naturalHeight;
                 isResized = true;
               }
-              if(isResized) {
-                 ctx.clearRect(0, 0, heroCanvas.width, heroCanvas.height);
-                 ctx.drawImage(images[currentFrame], 0, 0);
+              if (isResized) {
+                // Draw without clearing to ensure seamless transitions
+                ctx.drawImage(images[currentFrame], 0, 0);
               }
             }
-            
-            currentFrame = (currentFrame + 1) % frameCount;
+
+            // Continuous Ping-Pong Loop
+            currentFrame += direction;
+            if (currentFrame >= frameCount - 1 || currentFrame <= 0) {
+              direction *= -1;
+            }
           }
         }
-        
+
         requestAnimationFrame(animateHero);
       }
     }
